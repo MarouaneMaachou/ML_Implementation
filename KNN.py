@@ -13,12 +13,12 @@ def sigmoid(z):
     return 1/(1+np.exp(-z))
 def distance(u,v):
     return np.linalg.norm(u-v)
-def neirest(u,X,k):
-    neirest=np.zeros((k,X.shape[1]))
+def nearest(u,X,k):
+    nearest=np.zeros((k,X.shape[1]))
     Distances=[distance(u,v) for v in X]
-    neirest=np.argsort(Distances)[:k]
+    nearest=np.argsort(Distances)[:k]
     
-    return neirest
+    return nearest
         
         
     
@@ -37,7 +37,7 @@ class KNN:
     def predict(self,X):
         Y=np.zeros((X.shape[0],1))
         for i in range(X.shape[0]):
-            choice=np.argmax(np.bincount(self.Y_train[neirest(X[i],self.X_train,self.n_neighbors)]))
+            choice=np.argmax(np.bincount(self.Y_train[nearest(X[i],self.X_train,self.n_neighbors)]))
             Y[i]=choice
             
         return Y
